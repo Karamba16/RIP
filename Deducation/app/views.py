@@ -12,7 +12,8 @@ from django.db.models import Q
     return render(request, 'index.html')'''
 
 from datetime import date
-from app import models
+from .models import *
+
 
 '''def detailed_operations_page(request, id):
     data_by_id = db_operations.get('operations_to_perform')[id]
