@@ -3,11 +3,12 @@ from django.db import models
 
 class Student(models.Model):
     first_name = models.CharField(max_length=20)
-    last_name = models.CharField(max_length=40)
+    description = models.CharField(max_length=1500, blank=True, null=True)
+    image = models.ImageField(blank=True, null=True)
+    status = models.CharField(max_length=30, choices=[('1', '1'), ('2', '2')], default='1')
 
-    #class Meta:
-     #   managed = False
-      #  db_table = 'student'
+    def __str__(self):
+        return self.first_name
 
 
 class ApplicationForDeducation(models.Model):
@@ -17,11 +18,11 @@ class ApplicationForDeducation(models.Model):
     date_application_complete = models.DateField(blank=True, null=True)
     application_status = models.TextField()  # This field type is a guess.
 
-    students = models.ManyToManyField(Student)
+    def confirm(self):
+        self.application_status = 'confirmed'
+        self.save()
 
-    #class Meta:
-     #   managed = False
-      #  db_table = 'application_for_deducation'
+    students = models.ManyToManyField(Student)
 
 
 class Users(models.Model):
@@ -31,24 +32,8 @@ class Users(models.Model):
     email = models.CharField(unique=True, max_length=30, blank=True, null=True)
     login = models.CharField(unique=True, max_length=40, blank=True, null=True)
     password = models.CharField(unique=True, max_length=30, blank=True, null=True)
-    role = models.CharField(blank=True, null=True)
-
-    #class Meta:
-     #   managed = False
-      #  db_table = 'users'
+    role = models.CharField(max_length=30, choices=[('1', '1'), ('2', '2')], default='1')
 
 
-class FacultyTypes(models.Model):
-    faculty_id = models.AutoField(primary_key=True)
-    faculty_name = models.CharField(max_length=30)
-    faculty_description = models.CharField(max_length=1500)
-    faculty_image_url = models.CharField(max_length=50, blank=True, null=True)
-    faculty_status = models.TextField()  # This field type is a guess.
-    def __str__(self):
-        return self.faculty_name
 
-    """
-    class Meta:
-        managed = False
-        db_table = 'faculty_types'
-    """
+

@@ -74,13 +74,14 @@ WSGI_APPLICATION = 'Deducation.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
-"""DATABASES = {
+DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
-"""
+
+
 '''DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
@@ -92,7 +93,9 @@ WSGI_APPLICATION = 'Deducation.wsgi.application'
         'OPTIONS': {'charset': 'utf8'},
         'TEST_CHARSET': 'utf8',
     }
-}'''
+}
+
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
@@ -103,6 +106,7 @@ DATABASES = {
         'PORT': '5432',
     }
 }
+'''
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
