@@ -1,2 +1,5 @@
 django-filter
 django
+drf-yasg
+coreapi
+djangorestframework_simplejwt

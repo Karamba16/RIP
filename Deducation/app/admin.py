@@ -4,5 +4,5 @@ from .models import *
 
 
 admin.site.register(Student)
-admin.site.register(Users)
+admin.site.register(User)
 admin.site.register(ApplicationForDeducation)

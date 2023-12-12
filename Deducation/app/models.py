@@ -1,3 +1,4 @@
+from django.contrib.auth.models import AbstractUser
 from django.db import models
 
 
@@ -12,7 +13,7 @@ class Student(models.Model):
 
 
 class ApplicationForDeducation(models.Model):
-    user = models.ForeignKey('Users', models.DO_NOTHING, db_column='user')
+    user = models.ForeignKey('User', models.DO_NOTHING, db_column='user')
     date_application_create = models.DateField(blank=True, null=True)
     date_application_accept = models.DateField(blank=True, null=True)
     date_application_complete = models.DateField(blank=True, null=True)
@@ -25,7 +26,7 @@ class ApplicationForDeducation(models.Model):
     students = models.ManyToManyField(Student)
 
 
-class Users(models.Model):
+class User(AbstractUser):
     user_id = models.AutoField(primary_key=True)
     first_name = models.CharField(max_length=20)
     last_name = models.CharField(max_length=40)
@@ -33,6 +34,9 @@ class Users(models.Model):
     login = models.CharField(unique=True, max_length=40, blank=True, null=True)
     password = models.CharField(unique=True, max_length=30, blank=True, null=True)
     role = models.CharField(max_length=30, choices=[('1', '1'), ('2', '2')], default='1')
+
+    def is_moderator(self):
+        return self.role == '2'
 
 
 
